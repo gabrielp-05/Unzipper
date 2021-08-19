@@ -5,5 +5,5 @@ Goals:
   - Compile both scripts into an executable to be installed on a users computer ✔
   - Add support for more file types (e.g. .rar, .7z) ✔
 
--Note:
-  -When uninstalling or updating, remove the key in "Computer\HKEY_CLASSES_ROOT\Directory\Background\shell\Unzipper"
+- Note:
+  - When uninstalling or updating, remove the key in "Computer\HKEY_CLASSES_ROOT\Directory\Background\shell\Unzipper"
