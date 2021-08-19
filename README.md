@@ -6,5 +6,5 @@ Goals:
   - Add support for more file types (e.g. .rar, .7z) ✔
 
 
-- Note:
+Note:
   - When uninstalling or updating, remove the key in "Computer\HKEY_CLASSES_ROOT\Directory\Background\shell\Unzipper"
