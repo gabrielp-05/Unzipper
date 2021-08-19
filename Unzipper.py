@@ -13,7 +13,7 @@ def main():
     """
 
     cwd = os.getcwd()
-    fileTypes = ['.zip','.rar','.7z'] # will later include support for '.rar','.7z' filetypes
+    fileTypes = ['.zip','.rar','.7z']
     zipFiles = list()
     for fileType in fileTypes:
         zipFiles.extend(glob(cwd+r'\\*{}'.format(fileType)))
