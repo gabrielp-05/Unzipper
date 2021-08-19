@@ -1,8 +1,11 @@
 import os
 from zipfile import ZipFile
+from pyunpack import Archive
 from glob import glob
 import ctypes
+import logging
 
+logging.basicConfig(filename='errorlog.log', level=logging.ERROR, force=True, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 def main():
     """
@@ -10,7 +13,7 @@ def main():
     """
 
     cwd = os.getcwd()
-    fileTypes = ['.zip'] # will later include support for '.rar','.7z' filetypes
+    fileTypes = ['.zip','.rar','.7z'] # will later include support for '.rar','.7z' filetypes
     zipFiles = list()
     for fileType in fileTypes:
         zipFiles.extend(glob(cwd+r'\\*{}'.format(fileType)))
@@ -21,10 +24,10 @@ def main():
     for file in zipFiles:
         fileName = os.path.basename(file)
         try:
-            with ZipFile(file,'r') as zipObj:
-                zipObj.extractall(cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0])
+                Archive(file).extractall(cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0], auto_create_dir=True)
                 filesExtracted += 1
-        except Exception:
+        except Exception as e:
+            logging.error(e)
             error = True
 
     if error:
