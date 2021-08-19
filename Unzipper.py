@@ -31,7 +31,7 @@ def main():
     if error:
         ctypes.windll.user32.MessageBoxW(0, "One or multiple exceptions occured, this could be due to files being corrupted or a file requiring a password", "An error has occured", 16)
     if filesExtracted >= 1:
-        ctypes.windll.user32.MessageBoxW(0, f"{filesExtracted}File extraction(s) completed.", "Completed", 0)
+        ctypes.windll.user32.MessageBoxW(0, f"{filesExtracted} File extraction(s) completed.", "Completed", 0)
 
 
 if __name__ == "__main__":
