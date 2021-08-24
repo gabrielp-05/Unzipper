@@ -1,8 +1,11 @@
-import os, logging, ctypes
-from zipfile import ZipFile
+import patoolib, ctypes, logging, os
 from glob import glob
 
-logging.basicConfig(filename=f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Unzipper\\errorlog.log', level=logging.ERROR, force=True, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+from patoolib.util import PatoolError
+
+if not os.path.exists(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\errorlog.log'):
+    os.makedirs(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\')
+logging.basicConfig(filename=os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\errorlog.log', level=logging.ERROR, force=True, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 def main():
     """
@@ -10,7 +13,7 @@ def main():
     """
 
     cwd = os.getcwd()
-    fileTypes = ['.zip'] # will later include support for '.rar' filetypes
+    fileTypes = ['.zip','.rar','.7z']
     zipFiles = list()
     for fileType in fileTypes:
         zipFiles.extend(glob(cwd+r'\\*{}'.format(fileType)))
@@ -20,10 +23,14 @@ def main():
 
     for file in zipFiles:
         fileName = os.path.basename(file)
+        path = cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0]
         try:
-            with ZipFile(file,'r') as zipObj:
-                zipObj.extractall(cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0])
-                filesExtracted += 1
+            if not os.path.exists(path):
+                os.makedirs(path)
+            patoolib.extract_archive(file, outdir=path)
+            filesExtracted += 1
+        except PatoolError as e:
+            logging.error(e)
         except Exception as e:
             logging.error(e)
             error = True
