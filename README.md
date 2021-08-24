@@ -3,7 +3,7 @@ A small Python program which allows users to extract all .zip files in any given
 
 Goals: 
   - Compile both scripts into an executable to be installed on a users computer ✔
-  - Add support for more file types (e.g. .rar) 🔨
+  - Add support for more file types (e.g. .rar, .7z) 🔨
 
 # Issues: 
 - I have yet to find a library in Python which allows me to extract from an archive of the .rar .zip and .7z formats, so this is being worked on.
