@@ -1,8 +1,11 @@
-import os, sys, ctypes, logging
-from pyunpack import Archive
+import patoolib, ctypes, logging, os
 from glob import glob
 
-logging.basicConfig(filename=f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Unzipper\\errorlog.log', level=logging.ERROR, force=True, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+from patoolib.util import PatoolError
+
+if not os.path.exists(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\errorlog.log'):
+    os.makedirs(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\')
+logging.basicConfig(filename=os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\errorlog.log', level=logging.ERROR, force=True, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 def main():
     """
@@ -20,9 +23,14 @@ def main():
 
     for file in zipFiles:
         fileName = os.path.basename(file)
+        path = cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0]
         try:
-            Archive(file).extractall(cwd+r'\\Unzipped\\'+os.path.splitext(fileName)[0], auto_create_dir=True)
+            if not os.path.exists(path):
+                os.makedirs(path)
+            patoolib.extract_archive(file, outdir=path)
             filesExtracted += 1
+        except PatoolError as e:
+            logging.error(e)
         except Exception as e:
             logging.error(e)
             error = True
