@@ -1,7 +1,6 @@
 import patoolib, ctypes, logging, os
-from glob import glob
-
 from patoolib.util import PatoolError
+from glob import glob
 
 if not os.path.exists(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\errorlog.log'):
     os.makedirs(os.getenv('LOCALAPPDATA') + '\\Programs\\Unzipper\\')
