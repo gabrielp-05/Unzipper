@@ -9,7 +9,7 @@ A small Python program which allows users to extract all .zip files in any given
     - With the .bat file and both .py files in the same directory, run the batch file. Then move both executables into the desired folder and run make_key.exe
     - Note that if you move the Unzipper.exe file then the program will stop working
     - To uninstall see "Notes"
-  - For both methods, the error log file is stored under "C:\Users\\<UserName>\AppData\Local\Programs\Unzipper\errorlog.log"
+  - For both methods, the error log file is stored under "C:\Users\ <UserName> \AppData\Local\Programs\Unzipper\errorlog.log"
 
 # Notes:
   - The key in the registry is in the path "Computer\HKEY_CLASSES_ROOT\Directory\Background\shell\Uncompress all". To remove just delete the "Uncompress all" key.
